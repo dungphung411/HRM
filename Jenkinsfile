@@ -25,7 +25,8 @@ pipeline {
   
   stage("Release"){
       steps {
-      bat 'dotnet build  %WORKSPACE%\\jenkins-demo\\HRM\\HRM.sln /p:PublishProfile=" %WORKSPACE%\\jenkins-demo\\HRM\\HRM.API\\Properties\\PublishProfiles\\JenkinsProfile.pubxml" /p:Platform="Any CPU" /p:DeployOnBuild=true /m'
+      bat 'dotnet build'
+      bat 'dotnet publish'
     }
   }
   
