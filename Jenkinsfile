@@ -37,7 +37,7 @@ pipeline {
     bat 'net stop w3svc'
     
     // Deploy package to IIS
-    bat ' & "C:\\Program Files (x86)\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe" -verb:sync -source:package="%WORKSPACE%\\HRM.API\\bin\\Zip\\net8.0\\publish\\HRM.API.zip" -dest:auto -setParam:"IIS Web Application Name"="Default Web Site" -skip:objectName=filePath,absolutePath=".\\\\PackageTmp\\\\web.config$" -enableRule:DoNotDelete -allowUntrusted=true'
+    bat '"C:\\Program Files (x86)\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe" -verb:sync -source:package="%WORKSPACE%\\HRM.API\\bin\\Zip\\net8.0\\publish\\HRM.API.zip" -dest:auto -setParam:"IIS Web Application Name"="Default Web Site" -skip:objectName=filePath,absolutePath=".\\\\PackageTmp\\\\web.config$" -enableRule:DoNotDelete -allowUntrusted=true'
     
     // Start IIS again
     bat 'net start w3svc'
@@ -46,3 +46,5 @@ pipeline {
 
  }  
 } 
+
+//source chuann nhat tam thoi la HRM.API , phao tu tao 1 file nhu the trong iis console
