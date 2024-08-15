@@ -26,7 +26,7 @@ pipeline {
   stage("Release"){
       steps {
       bat 'dotnet build'
-      bat 'dotnet publish -c Release -o  /p:WebPublishMethod=Package /p:PackageLocation=./bin/Zip/net8.0/publish/HRM.API.zip'
+      bat 'dotnet publish -c Release  /p:WebPublishMethod=Package /p:PackageLocation=./bin/Zip/net8.0/publish/HRM.API.zip'
     }
   }
   
