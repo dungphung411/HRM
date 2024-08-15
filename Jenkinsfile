@@ -26,7 +26,7 @@ pipeline {
   stage("Release"){
       steps {
       bat 'dotnet build'
-      bat 'dotnet publish'
+      bat 'dotnet publish -c Release -o  /p:WebPublishMethod=Package /p:PackageLocation=./bin/Zip/net8.0/publish/HRM.API.zip'
     }
   }
   
@@ -36,7 +36,7 @@ pipeline {
     bat 'net stop "w3svc"'
     
     // Deploy package to IIS
-    bat '"C:\\Program Files (x86)\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe" -verb:sync -source:package="%WORKSPACE%\\jenkins-demo\\HRM\\HRM.API\\bin\\Debug\\net8.0\\HRM.API.zip" -dest:auto -setParam:"IIS Web Application Name"="HRM.Web" -skip:objectName=filePath,absolutePath=".\\\\PackageTmp\\\\Web.config$" -enableRule:DoNotDelete -allowUntrusted=true'
+    bat '"C:\\Program Files (x86)\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe" -verb:sync -source:package="%WORKSPACE%\\jenkins-demo\\HRM\\HRM.API\\bin\\Zip\\net8.0\\publish\\HRM.API.zip" -dest:auto -setParam:"IIS Web Application Name"="HRM.Web" -skip:objectName=filePath,absolutePath=".\\\\PackageTmp\\\\Web.config$" -enableRule:DoNotDelete -allowUntrusted=true'
     
     // Start IIS again
     bat 'net start "w3svc"'
